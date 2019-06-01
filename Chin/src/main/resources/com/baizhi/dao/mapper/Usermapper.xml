@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper  namespace="com.baizhi.dd.dao.UserDao">
+	
+
+	<!-- 查询 -->
+	<select id="queryAllUser" resultType="User">
+			select * from Users	 
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" >
+		update Users set status=#{status} where email=#{email} 
+	</update>
+	
+		<!-- 查询 -->
+	<select id="useremail" resultType="User">
+			select * from Users where email=#{email} 
+	</select>
+	
+	
+	 
+		<!-- front前台登录 -->
+	<select id="selectAll" resultType="User">
+			select * from Users where email=#{email,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
+	</select> 
+	<!-- '123@qq.com', '111111' -->
+	
+	
+	
+	<!-- 前台注册 -->
+	<insert id="insertUser" parameterType="User">
+		insert into Users values(#{id,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{salt,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR})
+	</insert>
+	
+	
+		
+	<update id="update1" parameterType="User">
+			update users set status=#{status},code=#{code} where id=#{id}
+	</update> 
+</mapper>

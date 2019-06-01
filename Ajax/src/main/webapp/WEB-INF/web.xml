@@ -1,0 +1,29 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+
+    <servlet>
+        <servlet-name>checkUserNameServlet</servlet-name>
+        <servlet-class>com.baizhi.Servlet.CheckUserNameServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ajaxCheckUserNameServlet</servlet-name>
+        <servlet-class>com.baizhi.Servlet.AjaxCheckUserNameServlet</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>checkUserNameServlet</servlet-name>
+        <url-pattern>/checkusername</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>ajaxCheckUserNameServlet</servlet-name>
+        <url-pattern>/ajaxcheckusername</url-pattern>
+    </servlet-mapping>
+
+</web-app>

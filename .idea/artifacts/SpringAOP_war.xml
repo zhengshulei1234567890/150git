@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SpringAOP:war">
+    <output-path>$PROJECT_DIR$/SpringAOp/target</output-path>
+    <root id="archive" name="SpringAOp.war">
+      <element id="artifact" artifact-name="SpringAOP:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--引入移动设备优先  必须写-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--引入BootStrap的全局样式-->
+    <link rel="stylesheet" href="../boot/css/bootstrap.css">
+    <script src="../boot/js/jquery-1.10.1.min.js"></script>
+    <script src="../boot/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../jqgrid/css/css/cupertino/jquery-ui-1.8.16.custom.css">
+    <link rel="stylesheet" href="../jqgrid/css/ui.jqgrid.css">
+    <script src="../jqgrid/js/i18n/grid.locale-cn.js"></script>
+    <script src="../jqgrid/js/jquery.jqGrid.src.js"></script>
+    <style type="text/css">
+        .aa{
+            background-color: bisque;
+        }
+        .bb{
+            border: 10px blue solid  ;
+        }
+    </style>
+    <script type="application/javascript">
+        $(function () {
+            $("#list").jqGrid({
+                url:"/JQGRID/Test/page_data.json", //发送请求向后台获取数据
+                datatype:"json",     //定义服务器返回的数据类型
+                colName:["id","用户名","密码","年龄"],//定义列名
+                cellEdit:true,//开启全局编辑表格
+                pager:"#pager",//分页
+                rowNum:"5",//每页显示的条数   rows为名字传值
+                rowList:[5,10,15,20],
+                caption:"用户信息列表展示", //表格名称
+                sortname:"id",//排序的列名
+                autowidth:true, //自适应宽度
+                multiselect:true, //支持多选
+                page:"5", //当前页号
+                viewrecords:true,//是否显示总记录数
+                colModel:[
+                    {name:"id" ,align:"center"},
+                    {name:"username",align:"center" ,classes:"aa bb",resizable:false},
+                    {name:"password",align:"center",editable:true,edittype:"select",
+                        editoptions:{
+                        value:"1:教学部 2：资源部"
+                        }
+                    },
+                    {name:"age",align:"center",
+                        //自定义格式       列值      cellModal初始化   行对象
+                        formatter:function (cellvalue,options,rowObject) {
+                            //自定义格式
+                            if(cellvalue<=19){
+                                return "少年";
+                            }else{
+                                return "青少年";
+                            }
+                        }
+
+                    }
+                ]
+            });
+        })
+    </script>
+
+</head>
+<body>
+    <table id="list"></table>
+    <div id="pager"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

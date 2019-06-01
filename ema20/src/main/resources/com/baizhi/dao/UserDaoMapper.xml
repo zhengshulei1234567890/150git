@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.UserDao">
+    <!--展示所有-->
+    <select id="queryAll" resultType="User">
+        select  * from user
+    </select>
+
+    <select id="showAll" resultType="User">
+        select * from  user username=#{username} and password=#{password}
+    </select>
+
+    <insert id="registerShowAll" parameterType="User">
+        insert into user (username,password,phone,email,adress)values (#{username},#{password},#{phone},#{email},#{adress})
+    </insert>
+</mapper>

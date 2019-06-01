@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+        <!--配置原始类的相关信息-->
+    <bean id="UserService" class="com.baizhi.dynimicproxy.UserServiceImpl">
+    </bean>
+
+   <bean id="accountService" class="com.baizhi.dynimicproxy.AccountServiceImpl"></bean>
+
+
+
+    <!--配置原始类的相关信息-->
+    <bean id="before" class="com.baizhi.dynimicproxy.Before">
+    </bean>
+    <bean id="After" class="com.baizhi.dynimicproxy.After">
+    </bean>
+    <bean id="arount" class="com.baizhi.dynimicproxy.Arount">
+    </bean>
+    <bean id="throw" class="com.baizhi.dynimicproxy.Throws">
+    </bean>
+    <aop:config>
+        <!--配置切入点-->                    <!--给所有的方法都添加额外功能-->
+
+        <aop:pointcut id="pc" expression="execution(* register(String))"></aop:pointcut>
+
+        <!--配置类切点-->
+<!--
+        <aop:pointcut id="pc" expression="execution(* *..UserService.register(String,..))"></aop:pointcut>
+-->
+
+
+        <!--配置包切入点-->
+<!--
+         <aop:pointcut id="pc" expression="execution(* com.baizhi.dynimicproxy..UserServiceImpl.register(String,..))"></aop:pointcut>
+-->
+
+        <!--args切入点函数                给所有的第一个参数为String类型的方法添加额外功能         -->
+<!--
+        <aop:pointcut id="pc" expression="args(String,..)"></aop:pointcut>
+-->
+        <!--within函数                    给所有的包下的UserServiceImpl类中的方法添加额外功能    -->
+<!--
+         <aop:pointcut id="pc" expression="within(*..UserServiceImpl)"></aop:pointcut>
+-->
+<!--
+        <aop:pointcut id="pc" expression="within(com.baizhi.dynimicproxy..*)"></aop:pointcut>
+-->
+
+        <!--组装切面-->
+<!--
+        <aop:advisor advice-ref="before" pointcut-ref="pc"></aop:advisor>
+-->
+        <!--<aop:advisor advice-ref="After" pointcut-ref="pc"></aop:advisor>-->
+        <!--<aop:advisor advice-ref="arount" pointcut-ref="pc"></aop:advisor>-->
+        <aop:advisor advice-ref="throw" pointcut-ref="pc"></aop:advisor>
+    
+    </aop:config>
+
+
+</beans>

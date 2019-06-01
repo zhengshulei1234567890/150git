@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="NiMaBi:war">
+    <output-path>$PROJECT_DIR$/NiMaBi/target</output-path>
+    <root id="archive" name="NiMaBi.war">
+      <element id="artifact" artifact-name="NiMaBi:war exploded" />
+    </root>
+  </artifact>
+</component>

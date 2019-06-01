@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--告知spring在哪个包下使用了注解-->
+    <context:component-scan base-package="com.baizhi.*"></context:component-scan>
+
+    <!--读取小配置文件--><!--如果是web项目需要添加classpath-->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <!--&lt;!&ndash;配置数据源  连接数据库的相关参数&ndash;&gt;-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+       <!-- &lt;!&ndash;注入驱动&ndash;&gt;-->
+        <property name="driverClassName">
+            <value>${driver}</value>
+        </property>
+        <!--&lt;!&ndash;注入url&ndash;&gt;-->
+        <property name="url">
+            <value>${url}</value>
+        </property>
+        <!--&lt;!&ndash;注入username&ndash;&gt;-->
+        <property name="username">
+            <value>${name}</value>
+        </property>
+        <!--&lt;!&ndash;注入password&ndash;&gt;-->
+        <property name="password">
+            <value>${password}</value>
+        </property>
+    </bean>
+    <!--&lt;!&ndash;创建sqlsessionFactory&ndash;&gt;-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+       <!-- &lt;!&ndash;注入数据源&ndash;&gt;-->
+        <property name="dataSource" ref="dataSource">
+        </property>
+        <!--&lt;!&ndash;起别名&ndash;&gt;-->
+        <property name="typeAliasesPackage">
+            <value>com.baizhi.entity</value>
+        </property>
+       <!-- &lt;!&ndash;Mapper文件注册&ndash;&gt;-->
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:com/baizhi/dao/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+    <!--自动构建DAO接口实现类对象-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage">
+            <value>com.baizhi.dao</value>
+        </property>
+    </bean>
+    <!--配置service实现类的相关信息-->
+    <!--<bean id="usersService" class="com.baizhi.service.UsersServiceImpl">
+        <property name="usersDao" ref="usersDao"></property>
+    </bean>-->
+   <!-- <bean id="adminService" class="com.baizhi.service.AdminServiceImpl">
+        <property name="adminDao" ref="adminDao"></property>
+    </bean>
+    <bean id="departmentService" class="com.baizhi.service.DepartmentServiceImpl">
+        <property name="departmentDao" ref="departmentDao"></property>
+    </bean>
+    <bean id="employeesService" class="com.baizhi.service.EmployeesServiceImpl">
+        <property name="employeesDao" ref="employeesDao"></property>
+    </bean>
+
+
+
+    &lt;!&ndash;引入事物的额外功能代码&ndash;&gt;
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    &lt;!&ndash;对事物进行相关描述&ndash;&gt;
+    <tx:advice id="transactionInterceptor" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="modify*"/>
+            <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    &lt;!&ndash;定义切入点&ndash;&gt;
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(* com.baizhi.Service..*.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="transactionInterceptor" pointcut-ref="pc"></aop:advisor>
+    </aop:config>
+    &lt;!&ndash;配置Action相关信息&ndash;&gt;
+
+    <bean id="AdminAction" class="com.baizhi.action.AdminAction" scope="prototype">
+        <property name="adminService" ref="adminService"></property>
+    </bean>
+    <bean id="DepartmentAction" class="com.baizhi.action.DepartmentAction" scope="prototype">
+        <property name="departmentService" ref="departmentService"></property>
+    </bean>
+    <bean id="EmployeesAction" class="com.baizhi.action.EmployeesAction" scope="prototype">
+        <property name="employeesService" ref="employeesService"></property>
+    </bean>-->
+
+    <!--激活@Transactional-->
+    <!--引入控制事务的相关代码-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--激活-->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+</beans>

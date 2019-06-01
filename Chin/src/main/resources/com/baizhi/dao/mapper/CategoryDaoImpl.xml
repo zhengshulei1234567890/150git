@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+ <mapper  namespace="com.baizhi.dd.dao.CategoryDao">
+  
+  <resultMap type="Category" id="category">
+		<id column="pid" property="id"/>
+		<result column="pname" property="name"/>
+		<result column="plevels" property="levels"/>
+		<result column="pparent_id" property="parentId"/>
+	<association property="category" javaType="Category">
+		<id column="Cid" property="id"/>
+		<result column="Cname" property="name"/>
+		<result column="Clevels" property="levels"/>	
+    </association>
+  </resultMap>
+     
+	
+	<!-- 类别管理 -->
+   	<select id="queryAll" resultMap="category">
+  		select p.id pid,p.name pname,p.levels plevels,
+		       c.id cid,c.name cname,c.levels clevels
+		from Category p left join Category c on p.id=c.parent_Id 
+  	</select>  
+  	
+  	
+  	<!-- 一级页面 -->
+   	<insert id="categoryFirst" parameterType="Category">
+  		insert into Category values (#{id},#{name},#{parentId,jdbcType=VARCHAR},#{levels})
+  	</insert>
+  	
+  
+  	<!-- 查询一级页面 -->
+  	<select id="queryFirst" resultType="Category">
+  		select * from Category where levels=1 
+  	</select>
+  	
+  	<!-- 二级页面 -->
+   	<insert id="categorySecond" parameterType="Category">
+  		insert into Category values (#{id},#{name},#{parentId},#{levels})
+  	</insert> 
+  	
+  	<!-- 查询当前一级类别下的二级类别 -->
+  	<select id="categorySelertSecond"  parameterType="Category"  resultType="Category">
+  	select * from Category where parent_id=#{id}
+  	</select>
+  	
+  	
+  	<!-- 删除id -->
+  	<delete id="categoryDelect"  parameterType="Category">
+  		delete from Category where id=#{id}
+  	</delete>
+  	
+  	<!-- 查询二级页面 -->
+  	<select id="querysecond" resultType="Category">
+  		select * from Category where levels=2
+  	</select>
+  	
+  	
+  	 <!-- 前台：查询所有类别 -->
+    <resultMap type="Category" id="c1">
+    	<id column="fid" property="id"/>
+    	<result column="fname" property="name"/>
+    	<result column="fparentId" property="parentId"/>
+    	<result column="flevels" property="levels"/>
+    	<collection property="seconds" ofType="Category">
+    		<id column="sid" property="id"/>
+    		<result column="sname" property="name"/>
+    		<result column="sparentId" property="parentId"/>
+    		<result column="slevels" property="levels"/>
+    	</collection>
+    </resultMap>
+    
+    <select id="queryCategoryAll" resultMap="c1">
+    	select 
+			f.id as fid,
+			f.name as fname,
+			f.parent_id as fparentId,
+			f.levels as flevels,
+				s.id as sid,
+				s.name as sname,
+				s.parent_id as sparentId,
+				s.levels as slevels
+		from category f inner join category s on f.id = s.parent_id 
+    </select>
+  	
+  	<!-- 分类管理查询-->
+  	<!-- <select id="querCategoryAll" resultType="Category">
+  		select * from Category
+  	</select> -->
+  	
+  	<select id="categoryFid" parameterType="String" resultMap="c1">
+  			select 
+			f.id as fid,
+			f.name as fname,
+			f.parent_id as fparentId,
+			f.levels as flevels,
+				s.id as sid,
+				s.name as sname,
+				s.parent_id as sparentId,
+				s.levels as slevels
+		from category f inner join category s on f.id = s.parent_id 
+   		where f.id=#{id}
+  	</select>
+  	
+  	
+</mapper>

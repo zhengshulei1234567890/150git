@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SpringStrutsMbatis:war">
+    <output-path>$PROJECT_DIR$/SpringStrutsMbatis/target</output-path>
+    <root id="archive" name="SpringStrutsMbatis.war">
+      <element id="artifact" artifact-name="SpringStrutsMbatis:war exploded" />
+    </root>
+  </artifact>
+</component>

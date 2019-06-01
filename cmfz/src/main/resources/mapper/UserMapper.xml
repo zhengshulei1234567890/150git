@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="head_pic" jdbcType="VARCHAR" property="headPic" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="dharma" jdbcType="VARCHAR" property="dharma" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="guru_id" jdbcType="VARCHAR" property="guruId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, phone_num, password, salt, head_pic, name, dharma, sex, province, sign, status, 
+    create_date, guru_id
+  </sql>
+
+  <!--查询-->
+  <select id="selectByPrimary" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+
+  <!--分页-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user limit #{start},#{rows}
+  </select>
+
+  <select id="getRecords" resultType="java.lang.Integer">
+    select count(1) from user
+  </select>
+
+
+
+
+  <!--删除数组-->
+  <delete id="deleteByPrimaryKey" parameterType="String">
+    delete from user
+    where id in
+    <foreach  collection="array" open="(" separator="," close=")" item="id" >
+      #{id}
+    </foreach>
+  </delete>
+
+  <!--导出-->
+  <select id="getAll" resultMap="BaseResultMap">
+    select  * from  user
+  </select>
+  <!--一周用户走势图-->
+  <select id="goeasy" resultType="EchartsMap">
+    select create_date as time,count(1) as count from user where datediff(NOW(),create_date)&lt;5 GROUP BY create_date
+  </select>
+
+  <!--驰名法州用户分布图-->
+  <select id="cmfz" resultType="EchartsMap1">
+    select province as name,count(1) as value from user group by province
+  </select>
+
+  <select id="goeasy2" resultType="EchartsMap2">
+    select month(create_date) as month,count(1) as count from user group by month(create_date)
+  </select>
+
+  <!--添加-->
+  <insert id="insert" parameterType="com.baizhi.entity.User">
+    insert into user (id, phone_num, password, 
+      salt, head_pic, name, 
+      dharma, sex, province, 
+      sign, status, create_date, 
+      guru_id)
+    values (#{id,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{headPic,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{dharma,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{sign,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, 
+      #{guruId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.baizhi.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="phoneNum != null">
+        phone_num,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="headPic != null">
+        head_pic,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="dharma != null">
+        dharma,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="sign != null">
+        sign,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="guruId != null">
+        guru_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="headPic != null">
+        #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dharma != null">
+        #{dharma,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="guruId != null">
+        #{guruId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!--上传修改-->
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.User">
+    update user
+    <set>
+      <if test="phoneNum != null">
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="headPic != null">
+        head_pic = #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dharma != null">
+        dharma = #{dharma,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="guruId != null">
+        guru_id = #{guruId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--修改-->
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.User">
+    update user
+    set phone_num = #{phoneNum,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      head_pic = #{headPic,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      dharma = #{dharma,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=DATE},
+      guru_id = #{guruId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

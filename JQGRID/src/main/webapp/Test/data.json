@@ -1,0 +1,20 @@
+[
+  {
+    "id":1,
+    "username":"张三",
+    "password":"123456",
+    "age":"18"
+  },
+  {
+    "id":1,
+    "username":"李四",
+    "password":"123456",
+    "age":"18"
+  },
+  {
+    "id":1,
+    "username":"王五",
+    "password":"123456",
+    "age":20
+  }
+]

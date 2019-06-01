@@ -1,0 +1,15 @@
+server:
+  port: 8989
+  context-path: /redis
+spring:
+  mvc:
+    view:
+      suffix: .jsp
+      prefix: /
+  redis:
+    database: 0
+    host: 192.168.234.30
+    port: 7000
+    pool:
+      max-active: 8
+      max-wait: -1

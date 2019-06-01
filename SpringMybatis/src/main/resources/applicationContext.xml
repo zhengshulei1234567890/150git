@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--读取小配置文件-->
+    <context:property-placeholder location="jdbc.properties"></context:property-placeholder>
+
+    <!--配置数据源 连接数据库的相关参数-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <!--为DriverClassName 驱动进行注入-->
+        <property name="driverClassName">
+            <value>${driver}</value>
+        </property>
+        <!--为URL赋值-->
+        <property name="url">
+            <value>${url}</value>
+        </property>
+        <!--为username赋值-->
+        <property name="username">
+            <value>${name}</value>
+        </property>
+        <!--为password属性赋值-->
+        <property name="password">
+            <value>${password}</value>
+        </property>
+    </bean>
+        <!--创建SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--第一个DataSource是SQLSessionFactoryBean中的属性-->
+        <!--第二个DataSource 是创建好的数据源的ID值-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--起别名 给com.baizhi.entity包下的所有类 默认起别名 别名名称类名  Order  order-->
+        <property name="typeAliasesPackage">
+            <value>com.baizhi.entity</value>
+        </property>
+        <!--Mapper文件注册-->
+        <property name="mapperLocations">
+            <list><!--给com/baizi/dao下的所有Mapper.xml结尾的文件进行注册-->
+                <value>com/baizhi/dao/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+        <!--自动创建DAO实现类对象 所在的包-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--说明自动创建DAO实现类对象  所在的包-->
+        <property name="basePackage">
+            <value>com.baizhi.dao</value>
+        </property>
+    </bean>
+
+    <!--配置原始类的相关信息-->
+    <bean id="userService" class="com.baizhi.Service.UserServiceImpl">
+        <!--给userDao注入对应的实现类对象  第一个UserDao是UserServiceImpl类中的属性-->
+        <!--第二个userDao spring自动创建好的DAO实现类对象的ID-->
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+    <!--引入事物额外功能-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--控制事物需要创建连接 创建连接需要连接数据库的相关参数-->
+        <property name="dataSource" ref="dataSource">
+        </property>
+    </bean>
+    <!--对于事物的相关描述-->
+    <tx:advice id="transactionInterceptor" transaction-manager="transactionManager">
+       <!--给添加到哪一个方法上的事物进行相关表述 支持通配符-->
+        <tx:attributes>
+            <tx:method name="modify*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--配置切入点-->
+
+    <aop:config>
+        <!--给com.baizhi.service包下的所有类中的所有方法添加事物-->
+        <aop:pointcut id="pc" expression="execution(*  com.baizhi.Service..*.*(..))"></aop:pointcut>
+        <!--组装切面-->
+        <aop:advisor advice-ref="transactionInterceptor" pointcut-ref="pc"></aop:advisor>
+    </aop:config>
+
+</beans>

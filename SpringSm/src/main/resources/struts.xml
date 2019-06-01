@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="admina" extends="struts-default"  namespace="/admina">
+        <!--登录-->
+        <action name="loginUsers" class="com.baizhi.action.AdminaAction" method="loginUsers">
+            <result name="login" type="redirect">selectShowAll</result>
+        </action>
+        <!--注册-->
+        <action name="registShowAll" class="com.baizhi.action.AdminaAction" method="registShowAll">
+            <result name="regist" type="redirect">selectShowAll</result>
+        </action>
+
+
+    <!--<package name="users" extends="struts-default" namespace="/users">-->
+        <!--查询所有-->
+        <action name="selectShowAll" class="com.baizhi.action.UsersAction" method="selectShowAll">
+            <result name="selectAll" >/emplist.jsp</result>
+        </action>
+        <!--删除-->
+        <action name="deleteShowAll" class="com.baizhi.action.UsersAction" method="deleteShowAll">
+            <result name="delete" type="redirectAction">selectShowAll</result>
+        </action>
+
+        <!--查询ID-->
+        <action name="selectById" class="com.baizhi.action.UsersAction" method="selectById">
+            <result name="select" type="dispatcher">/updateEmp.jsp</result>
+        </action>
+        <!--修改-->
+        <action name="updateShowAll" class="com.baizhi.action.UsersAction" method="updateShowAll">
+            <!--<interceptor-ref name="defaultStack">
+                <param name="fileUpload.allowedExtensions">txt,jpg,gif,png</param>
+            </interceptor-ref>-->
+            <result name="update" type="redirectAction">selectShowAll</result>
+        </action>
+        <!--添加-->
+        <action name="insertShowAll" class="com.baizhi.action.UsersAction" method="insertShowAll">
+            <result name="insert" type="redirect">selectShowAll</result>
+        </action>
+    </package>
+
+</struts>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.UserDao">
+    <insert id="register">
+        insert into t_User (username,password,salary) values (#{username},#{password},#{salary})
+    </insert>
+    <update id="update" >
+        update t_User
+        <set>
+            <if test="username!=null">
+                username=#{username},
+            </if>
+            <if test="password!=null">
+                password=#{password},
+            </if>
+            <if test="salary!=null">
+                salary=#{salary}
+            </if>
+            where id=#{id}
+        </set>
+    </update>
+
+    <select id="selectAll" resultType="User">
+        select * from t_User
+    </select>
+
+    <delete id="delete">
+        delete from t_User where id=#{id}
+    </delete>
+
+    <delete id="deleteById">
+        delete from t_User where id in
+        <foreach collection="array" open="(" item="ids" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+</mapper>

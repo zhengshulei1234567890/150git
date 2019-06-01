@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="sm" extends="struts-default" namespace="/user">
+        <action name="register" class="com.baizhi.action.UserAction" method="register">
+            <result name="registreOk">
+                /registreOk.jsp
+            </result>
+        </action>
+
+
+        <action name="showAll" class="com.baizhi.action.UserAction" method="showAll">
+
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置User类的相关信息-->
+<bean id="user" class="com.baizhi.entity.User">
+    <property name="id">
+        <value>1</value>
+    </property>
+    <property name="username">
+        <value>张三</value>
+    </property>
+    <property name="password">
+        <value>123456</value>
+    </property>
+
+
+
+    <!--给数组类型  names赋值-->
+    <property name="names">
+        <array>
+            <value>小黑</value>
+            <value>小白</value>
+            <value>小红</value>
+            <value>小明</value>
+        </array>
+    </property>
+        <!--给List类型 tels赋值-->
+    <property name="tels">
+        <list>
+            <value>123</value>
+            <value>123</value>
+            <value>234</value>
+            <value>234</value>
+        </list>
+    </property>
+    <!--给Set类型 sts赋值 不可重复-->
+    <property name="sts">
+        <set>
+            <value>123</value>
+            <value>123</value>
+            <value>234</value>
+            <value>234</value>
+        </set>
+    </property>
+    <!--给map类型  maps赋值-->
+    <property name="maps">
+        <map>
+            <!--代表一个键值对-->
+            <entry key="1">
+                <value>张三</value>
+            </entry>
+            <entry key="2">
+                <value>赵四</value>
+            </entry>
+        </map>
+    </property>
+    <!--给Properties属性赋值-->
+    <property name="props">
+        <props>
+            <prop key="姓名">张三</prop>
+            <prop key="年龄">12</prop>
+            <prop key="密码">123456</prop>
+        </props>
+    </property>
+
+</bean>
+    <!--配置count类的相关信息 name=id   countName  salary   index=0  1  2     type= java.lang  -->
+    <bean id="count" class="com.baizhi.entity.Count">
+        <!--给ID属性赋值-->
+        <constructor-arg >
+            <value>2</value>
+        </constructor-arg>
+        <!--给countName属性赋值-->
+        <constructor-arg >
+            <value>张三</value>
+        </constructor-arg>
+        <!--给salary属姓进行赋值-->
+        <constructor-arg >
+            <value>100.23</value>
+        </constructor-arg>
+
+    </bean>
+    <!--配置UserDAOImpl类的相关信息-->
+    <bean id="ud" class="com.baizhi.dao.UserDaoImpl">
+    </bean>
+
+    <!--配置UserServiceImpl类的相关信息-->
+    <bean id="userService" class="com.baizhi.Service.UserServiceImpl" autowire="byName"   >
+        <!--为userDAO做属性注入-->
+        <property name="userDao"  ref="ud">
+        </property>
+    </bean>
+
+    <!--配置MyConnection类的相关信息-->
+    <bean id="conn" class="com.baizhi.FactoryBean.Myconnection">
+
+    </bean>
+
+    <!--配置mysqlsessionFactory类相关信息-->
+    <bean id="sqlSessionFactory" class="com.baizhi.FactoryBean.MySqlSessionFactory">
+    </bean>
+
+
+
+    <!--配置student类相关信息-->
+    <bean id="stu" class="com.baizhi.entity.Student" scope="prototype">
+
+    </bean>
+
+</beans>

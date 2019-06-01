@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.Dao.UserDao">
+    <insert id="save">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select  kg.nextval from dual
+        </selectKey>
+        insert into t_User (id,username,password,age) values(#{id},#{username},#{password},#{age})
+    </insert>
+
+    <select id="selectAll" resultType="User">
+        select * from t_User where username=#{username}
+    </select>
+
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="150git" />
+        <module name="Ajax" />
+        <module name="BootStrap1" />
+        <module name="CaoNiMa" />
+        <module name="CasCade" />
+        <module name="Chin" />
+        <module name="cmfz" />
+        <module name="ema20" />
+        <module name="ema21" />
+        <module name="ems10" />
+        <module name="ems11" />
+        <module name="es" />
+        <module name="JQGRID" />
+        <module name="MavenJAVA" />
+        <module name="NiMaBi" />
+        <module name="poi" />
+        <module name="redis" />
+        <module name="redisday1" />
+        <module name="SpringAOP" />
+        <module name="SpringBoot" />
+        <module name="springboot-demo" />
+        <module name="SpringMVC" />
+        <module name="SpringMVCday2" />
+        <module name="SpringMybatis" />
+        <module name="SpringSm" />
+        <module name="SpringStrutsMbatis" />
+        <module name="SSM" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="150git" target="1.8" />
+      <module name="Ajax" target="1.7" />
+      <module name="BootStrap1" target="1.7" />
+      <module name="CaoNiMa" target="1.7" />
+      <module name="CasCade" target="1.7" />
+      <module name="Chin" target="1.7" />
+      <module name="cmfz" target="1.8" />
+      <module name="demo" target="1.8" />
+      <module name="ema20" target="1.7" />
+      <module name="ema21" target="1.7" />
+      <module name="ems1.0" target="1.5" />
+      <module name="ems10" target="1.7" />
+      <module name="ems11" target="1.7" />
+      <module name="es" target="1.7" />
+      <module name="JGQRID" target="1.7" />
+      <module name="JQGRID" target="1.7" />
+      <module name="MavenJAVA" target="1.7" />
+      <module name="NiMaBi" target="1.7" />
+      <module name="poi" target="1.8" />
+      <module name="redis" target="1.7" />
+      <module name="redisday1" target="1.7" />
+      <module name="SM" target="1.5" />
+      <module name="SMD" target="1.7" />
+      <module name="SpringAOP" target="1.7" />
+      <module name="SpringBoot" target="1.7" />
+      <module name="springboot-demo" target="1.8" />
+      <module name="SpringMVC" target="1.7" />
+      <module name="SpringMVCday" target="1.5" />
+      <module name="SpringMVCday2" target="1.7" />
+      <module name="SpringMybatis" target="1.7" />
+      <module name="SpringSm" target="1.7" />
+      <module name="SpringStrutsMbatis" target="1.7" />
+      <module name="SSM" target="1.7" />
+      <module name="test" target="1.7" />
+      <module name="testJQGRID" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

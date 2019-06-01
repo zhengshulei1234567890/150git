@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="admin" extends="struts-default" namespace="/admin">
+
+        <!--登录-->
+        <action name="loginShowAll" class="com.baizhi.action.AdminAction" method="loginShowAll">
+            <result name="login" type="redirectAction">
+            <param name="namespace">/dep</param>
+            <param name="actionName">selectShowAll</param>
+            </result>
+        </action>
+        <!--注册-->
+        <action name="registerShowAll" class="com.baizhi.action.AdminAction" method="registerShowAll">
+            <result name="register" type="redirectAction">
+            <param name="namespace">/dep</param>
+            <param name="actionName">selectShowAll</param>
+            </result>
+        </action>
+    </package>
+                             <!--员工表-->
+    <package name="emp" extends="struts-default" namespace="/emp">
+       <!--员工表查询所有-->
+        <action name="selectAllEmp" class="com.baizhi.action.EmployeesAction" method="selectAllEmp">
+            <result name="selectAllEmp" >/emplist.jsp</result>
+        </action>
+        <!--删除-->
+        <action name="deleteAllEmp" class="com.baizhi.action.EmployeesAction" method="deleteAllEmp">
+            <result name="deleteAllEmp" type="redirectAction">selectAllEmp</result>
+        </action>
+        <!--修改-->
+        <action name="updateShowAll" class="com.baizhi.action.EmployeesAction" method="updateShowAll">
+            <result name="updateShowAll" type="redirectAction">selectAllEmp</result>
+        </action>
+        <!--查询id-->
+        <action name="selectById" class="com.baizhi.action.EmployeesAction" method="selectById">
+            <result name="selectById" type="dispatcher">/updateEmp.jsp</result>
+        </action>
+        <!--添加-->
+        <action name="insertShowAll" class="com.baizhi.action.EmployeesAction" method="insertShowAll">
+            <result name="insertShowAll" type="redirectAction">selectAllEmp</result>
+        </action>
+
+    </package>
+                                <!--部门表-->
+    <package name="dep" extends="struts-default" namespace="/dep">
+       <!--查询所有-->
+        <action name="selectShowAll" class="com.baizhi.action.DepartmentAction" method="selectShowAll">
+            <result name="selectShowAll" >/departments.jsp</result>
+        </action>
+
+    <action name="ShowAll" class="com.baizhi.action.DepartmentAction" method="ShowAll">
+    </action>
+        <!--添加部门-->
+        <action name="insertShowAll" class="com.baizhi.action.DepartmentAction" method="insertShowAll">
+            <result name="insertShowAll" type="redirectAction">selectShowAll</result>
+        </action>
+        <!--查询id-->
+        <action name="selectById" class="com.baizhi.action.DepartmentAction" method="selectById">
+            <result name="selectById" type="dispatcher">/updateDepartment.jsp</result>
+        </action>
+        <!--更新修改-->
+        <action name="updateShowAll" class="com.baizhi.action.DepartmentAction" method="updateShowAll">
+            <result name="updateShowAll" type="redirectAction">selectShowAll</result>
+        </action>
+
+    </package>
+</struts>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="admin" extends="struts-default" namespace="/admin">
+
+
+        <action name="login" class="adminAction" method="login">
+            <result name="ok" type="redirectAction">
+                <param name="namespace">/department</param>
+                <param name="actionName">queryAll</param>
+            </result>
+            <result name="error" type="redirect">/login.jsp</result>
+        </action>
+        <action name="regist" class="adminAction" method="regist">
+            <result name="ok" type="redirect">/login.jsp</result>
+        </action>
+    </package>
+
+    <package name="department" extends="struts-default" namespace="/department">
+
+
+
+        <action name="queryAll" class="departmentAction" method="queryAll">
+            <result name="ok" type="dispatcher">/departments.jsp</result>
+        </action>
+
+        <action name="save" class="departmentAction" method="save">
+            <result name="ok" type="redirectAction">queryAll</result>
+        </action>
+
+        <action name="selectByID" class="departmentAction" method="selectByID">
+            <result name="ok" type="dispatcher">/updateDepartment.jsp</result>
+        </action>
+
+        <action name="update" class="departmentAction" method="update">
+            <result name="ok" type="redirectAction">queryAll</result>
+        </action>
+
+        <action name="queryAllEmployee" class="departmentAction" method="queryAllEmployee">
+            <result name="ok" type="dispatcher">/emplist.jsp</result>
+        </action>
+
+        <action name="selectAll" class="departmentAction" method="selectAll">
+        </action>
+    </package>
+
+    <package name="employee" extends="struts-default" namespace="/employee">
+
+
+
+
+
+        <action name="addEmp" class="employeeAction" method="addEmp">
+            <result name="ok" type="redirectAction">
+                <param name="namespace" >/department</param>
+                <param name="actionName">queryAll</param>
+            </result>
+        </action>
+
+        <action name="selectByID" class="employeeAction" method="selectByID">
+            <result name="ok" type="dispatcher">/updateEmp.jsp</result>
+        </action>
+
+        <action name="updateEmp" class="employeeAction" method="updateEmp">
+            <result name="ok" type="dispatcher">
+                /emplist.jsp
+            </result>
+        </action>
+
+        <action name="delete" class="employeeAction" method="delete">
+            <result name="ok" type="redirectAction">
+                <param name="namespace" >/department</param>
+                <param name="actionName">queryAll</param>
+            </result>
+        </action>
+    </package>
+
+</struts>

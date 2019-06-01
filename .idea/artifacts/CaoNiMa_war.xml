@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="CaoNiMa:war">
+    <output-path>$PROJECT_DIR$/CaoNiMa/target</output-path>
+    <root id="archive" name="CaoNiMa.war">
+      <element id="artifact" artifact-name="CaoNiMa:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.EmployeeDAO">
+   <!--添加-->
+    <insert id="addEmp">
+        insert into employee (head,name,salary,age,dept_id) values (#{head},#{name},#{salary},#{age},#{dept_id})
+    </insert>
+    <!--查询回显-->
+    <select id="selectByID" resultType="Employee">
+        select * from employee where id=#{id}
+    </select>
+    <!--修改-->
+    <update id="updateEmp">
+        update employee
+        <set>
+            <if test="head != null">
+                head=#{head},
+            </if>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="salary != null">
+                salary=#{salary},
+            </if>
+            <if test="age != null">
+                age=#{age},
+            </if>
+            <if test="dept_id != null">
+                dept_id=#{dept_id}
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+    <!--删除-->
+    <delete id="delete">
+        delete from employee where id = #{id}
+    </delete>
+</mapper>

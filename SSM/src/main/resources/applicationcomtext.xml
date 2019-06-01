@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--读取小配置文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <!--配置数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName">
+            <value>${driver}</value>
+        </property>
+        <property name="url">
+            <value>${url}</value>
+        </property>
+        <property name="username">
+            <value>${name}</value>
+        </property>
+        <property name="password">
+            <value>${password}</value>
+        </property>
+    </bean>
+    <!--创建sqlsessionFactoray-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <!--起别名-->
+        <property name="typeAliasesPackage">
+            <value>com.baizhi.entity</value>
+        </property>
+        <!--Mapper文件注册-->
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:com/baizhi/dao/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+    <!--创建dao实现类对象-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage">
+            <value>com.baizhi.dao</value>
+        </property>
+    </bean>
+</beans>

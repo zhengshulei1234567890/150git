@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper  namespace="com.baizhi.dd.dao.OrderDao">
+	 <resultMap type="Orders" id="orders">
+		<id column="pid" property="id"/>
+		<result column="orderNo" property="orderNo"/>		
+		<result column="puserId" property="userId"/>
+		<result column="ptotal" property="total"/>		
+		<result column="createDate" property="createDate"/>
+		<result column="paddressid" property="addressid"/>		
+	<association property="addr" javaType="Addr">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>	
+		<result column="local" property="local"/>	
+		<result column="zip_code" property="zip_code"/>	
+		<result column="phone" property="phone"/>	
+		<result column="user_id" property="user_id"/>				
+    </association>
+  </resultMap>
+
+				<!-- 展示所有 -->
+	<select id="queryAllOrders" resultMap="orders">
+		select p.id pid,p.order_No orderNo, p.user_id puserId,p.total ptotal ,p.create_Date createDate,p.address_id paddressid ,c.*      
+           from Orders p left join Address c on p.address_id=c.id 					 
+	</select>
+	
+	
+	
+	 <resultMap type="Orders" id="o2">
+			<id column="oid" property="id"/>
+			<result column="oorderNo" property="orderNo"/>		
+			<result column="ouserId" property="userId"/>
+			<result column="ototal" property="total"/>		
+			<result column="ocreateDate" property="createDate"/>
+			<result column="oaddressid" property="addressid"/>		
+	<collection property="items" ofType="Item">
+			<id column="iid" property="id"/>
+			<result column="ibookId" property="bookId"/>	
+			<result column="icount" property="count"/>	
+			<result column="icreateDate" property="createDate"/>	
+			<result column="iorderId" property="orderId"/>				
+    </collection>
+	</resultMap>
+	
+	
+				<!-- 订单详情 -->
+	<select id="queryOrder" parameterType="String" resultMap="o2">
+  		select
+			o.id as oid,
+			o.order_no as oorderNo,
+			o.user_id as ouserId,
+			o.total as ototal,
+			o.create_date as ocreateDate,
+			o.address_id as oaddressid,
+				i.id as iid,
+				i.book_id as ibookId,
+				i.count as icount,
+				i.create_date as icreateDate,
+				i.order_id as iorderId
+		from orders o left join Item i on o.id = i.order_id
+		where o.id=#{id}
+  </select>
+		
+		
+	<insert id="addOrder" parameterType="Orders">
+  	insert into orders values(#{id},#{orderNo},#{userId},#{total},#{createDate},#{addressid})
+   </insert>
+
+
+
+</mapper>
+
+	
+	
+	
+	
+	
+	

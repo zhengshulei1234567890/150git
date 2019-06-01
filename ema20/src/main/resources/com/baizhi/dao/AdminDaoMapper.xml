@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.AdminDao">
+    <select id="Admin" resultType="Admin">
+        select * from admin
+    </select>
+    <!--添加-->
+    <insert id="save" parameterType="Admin">
+        insert into admin(username,password,phone,email,adress,status)values (#{username},#{password},#{phone},#{email},#{adress},#{status})
+    </insert>
+    <!--查询id-->
+    <select id="selectShow">
+        select * from admin id=#{id}
+    </select>
+    <!--修改-->
+    <update id="update" parameterType="Admin">
+        update admin set username=#{username},phone=#{phone},email=#{email} where id=#{id}
+    </update>
+    <!--分页-->
+
+</mapper>

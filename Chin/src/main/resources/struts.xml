@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+
+	<package name="admin" extends="struts-default" namespace="/admin">
+	
+	<action name="admin" class="com.baizhi.dd.action.AdminAction" method="query">
+		<result name="ok">/index.jsp</result>
+	</action>
+
+	<!-- 登录 -->
+	<action name="login" class="com.baizhi.dd.action.AdminActionLogin" method="login">	
+		<result name="loginAction" type="redirect">/back/main/main.jsp</result>
+
+		<result name="login" type="dispatcher">/back/login.jsp</result>
+	</action>
+
+
+	<!-- 退出 -->
+	<action name="logou" class="com.baizhi.dd.action.AdminActionLogou" method="logou">
+	<result name="LogouAction" >/back/login.jsp</result>	
+	</action>
+
+
+	<!-- 验证码 -->
+	<action name="Captcha" class="com.baizhi.dd.action.AdminActionCaptcha" method="captcha">
+	<result type="stream">
+		<param name="contentType">image/png</param>
+	</result>	
+	</action>	
+
+</package>	
+
+
+							<!-- 类别管理Category -->
+
+
+<package name="category" extends="struts-default" namespace="/category">
+	<!-- 类别管理Category -->
+	<action name="selectAllCategory" class="com.baizhi.dd.action.CategoryAction" >
+	<result name="CateAction" type="dispatcher">/back/category/show.jsp</result>	
+	</action>
+	
+	<!-- 一级页面 -->
+	<action name="addCategory" class="com.baizhi.dd.action.CategoryFirstAction" method="CategoryFirst">
+	<result name="CategoryFirst" type="redirectAction">selectAllCategory</result>	
+	</action>
+	<!-- 二级页面 -->
+	<action name="selectAllSecondCategory" class="com.baizhi.dd.action.SelectCategoryFirstAction" method="querysecond">
+	<result name="second" type="dispatcher">/back/book/add.jsp</result>	
+	</action>
+	
+	
+	<!-- 1级页面查(二级页面添加查询一级页面) -->
+	<action name="selectAllFirst" class="com.baizhi.dd.action.SelectCategoryFirstAction" method="QueryFirst">
+	<result name="CategoryFirstSelert" type="dispatcher">/back/category/add-second.jsp</result>	
+	</action>
+	
+	<!-- 二级页面 -->
+	<action name="addCategory1" class="com.baizhi.dd.action.CategorySecondAction" method="CategorySecond">
+	<result name="CategorySecond" type="redirectAction">selectAllCategory</result>	
+	</action>
+	
+	
+	
+	<!-- 删除 -->
+	<action name="deleteCategoryById" class="com.baizhi.dd.action.CategoryDelectAction" >
+	<result name="CateDelect" type="redirectAction">selectAllCategory</result>	
+	</action>
+</package>	
+
+
+
+							<!-- 图书管理 -->
+<package name="book" extends="struts-default" namespace="/book">
+		<!-- 图书管理 -->
+		<action name="selectAllBook" class="com.baizhi.dd.action.BookAction" method="BookAction">
+			<result name="bookquery" type="dispatcher">/back/book/show.jsp</result>	
+		</action>
+	
+	
+	
+	
+		<!-- 图书管理  删除 -->
+		<action name="deleteBook" class="com.baizhi.dd.action.BookAction" method="bookquerydelete">
+			<result name="success" type="redirectAction">selectAllBook</result>	
+		</action>
+	
+	
+		<!-- 图书管理  查询 -->
+		<action name="selectAllSecondCategory" class="com.baizhi.dd.action.BookAction" method="selecAllbook">
+			<result name="selectAllbook" type="dispatcher">/back/book/add.jsp</result>	
+		</action>
+		
+		
+		<!-- 图书管理  添加 -->
+		<action name="addBook" class="com.baizhi.dd.action.BookAction" method="insertAlltbook">
+			<result name="insertAllbook" type="redirectAction">selectAllBook</result>	
+		</action>
+		
+		
+		<!-- 图书管理  模糊查询-->
+		<action name="selectBookByKey" class="com.baizhi.dd.action.BookAction" method="likebookAll">
+			<result name="likebook" type="dispatcher">/back/book/show.jsp</result>	
+		</action>
+		
+		
+		
+		<!-- 图书管理  查询   (回显)-->
+		<action name="selectBookById" class="com.baizhi.dd.action.BookAction" method="selectbook">
+			<result name="selectbook" type="dispatcher">/back/book/update.jsp</result>	
+		</action>
+	
+	
+		<!-- 图书管理    修改-->
+		<action name="updateBook" class="com.baizhi.dd.action.BookAction" method="updatebook">
+			<result name="updatebook" type="redirectAction">selectAllBook</result>	
+		</action>
+	
+	</package>	
+	
+	
+	
+	
+	
+								<!-- 订单管理 -->
+<package name="order" extends="struts-default" namespace="/order">
+								<!-- 图书管理  展示所有 -->
+		<action name="selectAll" class="com.baizhi.dd.action.OrderAction" method="queryAllOrder">
+			<result name="orderquery" type="dispatcher">/back/order/show.jsp</result>	
+		</action>
+
+		
+								<!-- 图书管理  订单性情 -->
+		<action name="selectOrderDetail" class="com.baizhi.dd.action.OrderAction" method="queryOrder">
+			<result name="ok" type="dispatcher">/back/order/detail.jsp</result>	
+		</action>
+</package>
+
+
+
+
+
+
+								<!-- 用户管理 -->
+<package name="user" extends="struts-default" namespace="/user">
+								<!-- 用户管理  展示所有 -->
+		<action name="selectAllUsers" class="com.baizhi.dd.action.UserAction" method="queryAllUser">
+			<result name="Userquery" type="dispatcher">/back/user/show.jsp</result>	
+		</action>
+		<!-- 状态 -->
+		<action name="updateUserStatus" class="com.baizhi.dd.action.UserAction" method="queryiduser">
+			<result name="statu" type="redirectAction">selectAllUsers</result>	
+		</action>
+		
+		
+		<!-- front 登录 -->
+		<action name="login" class="com.baizhi.dd.action.UserAction" method="loginfront">
+			<result name="login" type="dispatcher">/front/user/login_form.jsp</result>
+			 <result name="loginfront" type="chain">
+			<param name="namespace">/front</param>
+			<param name="actionName">main</param>	
+			</result> 
+		</action>	
+		
+		<!-- 退出 -->
+	<action name="exit" class="com.baizhi.dd.action.UserAction" method="logou">
+		<result name="logou" >/front/user/login_form.jsp</result>	
+	</action>
+	
+	
+		<!-- 注册 -->
+	<action name="adduser" class="com.baizhi.dd.action.UserAction" method="register">
+		<result name="register">/front/user/verify_form.jsp</result>	
+		
+	</action>	
+	
+	
+		<!--  -->
+	<action name="active" class="com.baizhi.dd.action.UserAction" method="update1">
+		<result name="ok">/front/user/register_ok.jsp</result>	
+		
+	</action>	
+	
+	
+</package>
+
+
+	
+	
+	
+
+						<!-- front -->
+ <package name="front" extends="struts-default" namespace="/front">		
+		<action name="main" class="com.baizhi.dd.action.BookAction" method="queryMainBook">
+			<result name="querymain">/front/main/main.jsp</result>
+		</action>		
+	</package>
+	
+	
+	<!-- 分页查询  -->
+	<package name="second" extends="struts-default" namespace="/second">		
+		<action name="secondJsp" class="com.baizhi.dd.action.secondAction" method="secondJsp">
+			<result name="second">/front/main/book_list.jsp</result>
+		</action>		
+		<!-- 查询所有  -->
+		<action name="selectOne" class="com.baizhi.dd.action.secondAction" method="selectBookQuery">
+			<result name="selectBook">/front/main/book_detail.jsp</result>
+		</action>		
+	</package>
+	
+	
+	<!-- 购物车 -->
+	<package name="cart" extends="struts-default" namespace="/cart">
+		<action name="addcart" class="com.baizhi.dd.action.CartAction" method="addcart">
+		<result name="addok" >/front/cart/cart_list.jsp</result>
+		</action>
+		
+		
+		<action name="update" class="com.baizhi.dd.action.CartAction" method="update">
+			<result name="update" >/front/cart/cart_list.jsp</result>
+		</action>
+		
+		
+		<action name="delete" class="com.baizhi.dd.action.CartAction" method="delete">
+			<result name="delete" >/front/cart/cart_list.jsp</result>
+		</action>
+	</package>
+	
+	
+		<!-- 地址 -->
+	<package name="address" extends="struts-default" namespace="/address">
+		
+		<action name="selectAddresses" class="com.baizhi.dd.action.AddressAction" method="addAddress">
+			<result name="ok">/front/order/address_form.jsp</result>
+			<result name="login" type="dispatcher">/front/user/login_form.jsp</result>
+		</action>
+	
+	<!-- 选择地址 -->
+	<action name="selectAddressesId" class="com.baizhi.dd.action.AddressAction" method="addAddressId">
+			<result name="ok" type="chain">selectAddresses</result>	
+	</action>
+	
+	
+	<action name="addOrder" class="com.baizhi.dd.action.AddressAction" method="addressQuery">
+			<result name="address" type="dispatcher">/front/order/order_ok.jsp</result>	
+	</action>
+	
+	
+	</package>
+	
+</struts>
+
+
+
+
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.DepartmentDAO">
+    <select id="queryAll" resultType="Department">
+        select * from department
+    </select>
+
+    <insert id="save">
+        insert into department (deptnumber,deptname) values (#{deptnumber},#{deptname})
+    </insert>
+
+    <select id="selectByID" resultType="Department">
+        select * from department where id=#{id}
+    </select>
+    
+    <update id="update">
+        update department set id=#{id},deptnumber=#{deptnumber},deptname=#{deptname} where id=#{id}
+    </update>
+
+    <resultMap id="deptMap" type="Department">
+        <id column="did" property="id"/>
+        <result column="ddeptnumber" property="deptnumber"/>
+        <result column="ddeptname" property="deptname"/>
+        <collection property="list" ofType="Employee">
+            <id column="eid" property="id"/>
+            <result column="ehead" property="head"/>
+            <result column="ename" property="name"/>
+            <result column="esalary" property="salary"/>
+            <result column="eage" property="age"/>
+            <result column="edeptid" property="dept_id"/>
+        </collection>
+    </resultMap>
+    <select id="queryAllEmployee" resultMap="deptMap">
+        select d.id as did,d.deptnumber as ddeptnumber,d.deptname as ddeptname,e.id as eid,
+        e.head as ehead,e.name as ename,e.salary as esalary,e.age as eage,e.dept_id as edeptid
+        from department d inner join employee e on d.id=e.dept_id
+        where d.id=#{id}
+    </select>
+
+    <select id="selectAll" resultType="Department">
+        select * from department
+    </select>
+</mapper>

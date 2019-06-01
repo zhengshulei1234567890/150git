@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/Ajax" />
+    <file type="web" url="file://$PROJECT_DIR$/BootStrap1" />
+    <file type="web" url="file://$PROJECT_DIR$/CaoNiMa" />
+    <file type="web" url="file://$PROJECT_DIR$/CasCade" />
+    <file type="web" url="file://$PROJECT_DIR$/Chin" />
+    <file type="web" url="file://$PROJECT_DIR$/ema20" />
+    <file type="web" url="file://$PROJECT_DIR$/ema21" />
+    <file type="web" url="file://$PROJECT_DIR$/ems1.0" />
+    <file type="web" url="file://$PROJECT_DIR$/ems10" />
+    <file type="web" url="file://$PROJECT_DIR$/ems11" />
+    <file type="web" url="file://$PROJECT_DIR$/es" />
+    <file type="web" url="file://$PROJECT_DIR$/JGQRID" />
+    <file type="web" url="file://$PROJECT_DIR$/JQGRID" />
+    <file type="web" url="file://$PROJECT_DIR$/NiMaBi" />
+    <file type="web" url="file://$PROJECT_DIR$/redis" />
+    <file type="web" url="file://$PROJECT_DIR$/redisday1" />
+    <file type="web" url="file://$PROJECT_DIR$/SM" />
+    <file type="web" url="file://$PROJECT_DIR$/SMD" />
+    <file type="web" url="file://$PROJECT_DIR$/SpringAOp" />
+    <file type="web" url="file://$PROJECT_DIR$/SpringBoot" />
+    <file type="web" url="file://$PROJECT_DIR$/SpringMVC" />
+    <file type="web" url="file://$PROJECT_DIR$/SpringMVCday" />
+    <file type="web" url="file://$PROJECT_DIR$/SpringMVCday2" />
+    <file type="web" url="file://$PROJECT_DIR$/SpringSm" />
+    <file type="web" url="file://$PROJECT_DIR$/SpringStrutsMbatis" />
+    <file type="web" url="file://$PROJECT_DIR$/SSM" />
+    <file type="web" url="file://$PROJECT_DIR$/test" />
+    <file type="web" url="file://$PROJECT_DIR$/testJQGRID" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/CaoNiMa/pom.xml" />
+        <option value="$PROJECT_DIR$/NiMaBi/pom.xml" />
+        <option value="$PROJECT_DIR$/Ajax/pom.xml" />
+        <option value="$PROJECT_DIR$/Chin/pom.xml" />
+        <option value="$PROJECT_DIR$/CasCade/pom.xml" />
+        <option value="$PROJECT_DIR$/MavenJAVA/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringAOp/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringMybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringSm/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringStrutsMbatis/pom.xml" />
+        <option value="$PROJECT_DIR$/SSM/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringMVC/pom.xml" />
+        <option value="$PROJECT_DIR$/ems10/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringMVCday2/pom.xml" />
+        <option value="$PROJECT_DIR$/BootStrap1/pom.xml" />
+        <option value="$PROJECT_DIR$/ems11/pom.xml" />
+        <option value="$PROJECT_DIR$/JQGRID/pom.xml" />
+        <option value="$PROJECT_DIR$/ema20/pom.xml" />
+        <option value="$PROJECT_DIR$/ema21/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringBoot/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/redis/pom.xml" />
+        <option value="$PROJECT_DIR$/redisday1/pom.xml" />
+        <option value="$PROJECT_DIR$/es/pom.xml" />
+        <option value="$PROJECT_DIR$/cmfz/pom.xml" />
+        <option value="$PROJECT_DIR$/poi/pom.xml" />
+        <option value="$PROJECT_DIR$/150git/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="JQGRID:war">
+    <output-path>$PROJECT_DIR$/JQGRID/target</output-path>
+    <root id="archive" name="JQGRID.war">
+      <element id="artifact" artifact-name="JQGRID:war exploded" />
+    </root>
+  </artifact>
+</component>

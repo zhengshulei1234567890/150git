@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.ChapterMapper">
+  <resultMap id="BaseResultMap" type="com.baizhi.entity.Chapter">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="createDate" jdbcType="DATE" property="createdate" />
+    <result column="album_Id" jdbcType="VARCHAR" property="albumId" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, size, duration, createDate, album_Id, path
+  </sql>
+
+
+  <!--分页-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from chapter where album_Id = #{albumId}
+    limit  ${(page-1)*rows},#{rows}
+  </select>
+
+  <select id="selectTotalCount" resultType="Integer">
+        select count(*)  from  chapter
+    </select>
+
+
+
+
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from chapter
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>-->
+  <!--删除-->
+  <delete id="deleteByPrimaryKey" parameterType="String">
+    delete from chapter
+    where id in
+    <foreach  collection="array" open="(" separator="," close=")" item="id" >
+      #{id}
+    </foreach>
+  </delete>
+
+
+
+  <!--添加-->
+  <insert id="insert" parameterType="com.baizhi.entity.Chapter">
+    insert into chapter (id, title,createDate, album_Id)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},#{createdate,jdbcType=DATE}, #{albumId,jdbcType=VARCHAR})
+  </insert>
+
+  <!--添加-->
+ <!-- <insert id="insert" parameterType="Chapter">
+    insert into chapter (id, title,
+      createDate, album_Id,)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+       #{createdate,jdbcType=DATE}, #{albumId,jdbcType=VARCHAR})
+  </insert>-->
+
+
+
+
+  <insert id="insertSelective" parameterType="com.baizhi.entity.Chapter">
+    insert into chapter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="createdate != null">
+        createDate,
+      </if>
+      <if test="albumId != null">
+        album_Id,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="albumId != null">
+        #{albumId,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!--上传-->
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.entity.Chapter">
+    update chapter
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="albumId != null">
+        album_Id = #{albumId,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.entity.Chapter">
+    update chapter
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="albumId != null">
+        album_Id = #{albumId,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+  <!--修改-->
+  <!--<update id="updateByPrimaryKey" parameterType="Chapter">
+    update chapter
+    set title = #{title,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=DATE},
+      album_Id = #{albumId,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>-->
+</mapper>
