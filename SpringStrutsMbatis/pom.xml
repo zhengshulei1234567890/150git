@@ -29,7 +29,7 @@
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
-      <version>1.2.47</version>
+      <version>1.2.83</version>
     </dependency>
     <!-- 引入spring相关的jar -->
     <dependency>
@@ -120,7 +120,7 @@
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
-      <version>1.2.47</version>
+      <version>1.2.83</version>
     </dependency>
     <!-- 引入log4j -->
     <dependency>
